@@ -1,13 +1,15 @@
+using System.Linq;
 using Connect4.Interfaces;
 
 namespace Connect4.Models
 {
     public class Connect4Game
     {
-        private readonly IPlayerAgent[] _players = new IPlayerAgent[2];
+        private readonly PlayerAgent[] _players = new PlayerAgent[2];
+        private readonly IPresenter boardPresenter = new BoardPresenter();
         public Player? Winner { get; private set; }
         
-        public Connect4Game(IPlayerAgent redAgent, IPlayerAgent yellowAgent)
+        public Connect4Game(PlayerAgent redAgent, PlayerAgent yellowAgent)
         {
             redAgent.Player = Player.Red;
             yellowAgent.Player = Player.Yellow;
@@ -26,7 +28,7 @@ namespace Connect4.Models
                 var player = _players[moveNumber++ % 2];
                 int move;
 
-                player.DisplayBoard(board);
+                boardPresenter.Show(board);
 
                 do
                 {
@@ -42,10 +44,11 @@ namespace Connect4.Models
 
                 if (!win) continue;
                 
-                player.DisplayBoard(board, win: true);
                 Winner = player.Player;
                 break;
             }
+            
+            boardPresenter.Show(board);
         }
     }
 }

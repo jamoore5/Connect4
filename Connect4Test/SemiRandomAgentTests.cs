@@ -1,4 +1,5 @@
 using Connect4.Models;
+using Connect4.Models.PlayAgent;
 using Xunit;
 
 namespace Connect4Test

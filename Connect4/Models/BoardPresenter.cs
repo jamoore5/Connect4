@@ -1,20 +1,15 @@
 using System;
-using Connect4.Models;
+using Connect4.Interfaces;
 
-namespace Connect4.Interfaces
+namespace Connect4.Models
 {
-    public abstract class IPlayerAgent
+    public class BoardPresenter : IPresenter
     {
-        public Player Player { get; set; }
-        public abstract int GetMove(Board board);
-        public virtual void DisplayInvalidMove() {}
-
-        public virtual void DisplayBoard(Board board, bool win=false)
+        public void Show(object board)
         {
-//            Console.SetCursorPosition(0, 0);
             Console.Clear();
             var originalColor = Console.ForegroundColor;
-            var lines = board.ToString().Trim().Split('\n');
+            var lines = ((Board) board).ToString().Trim().Split('\n');
             foreach(var line in lines)
             {
                 Console.ForegroundColor = originalColor;
@@ -41,6 +36,4 @@ namespace Connect4.Interfaces
             Console.WriteLine("  1 2 3 4 5 6 7");
         }
     }
-    
-    
 }

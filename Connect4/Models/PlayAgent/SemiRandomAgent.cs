@@ -1,9 +1,7 @@
-using System;
 using System.Linq;
 using Connect4.Extension;
-using Connect4.Interfaces;
 
-namespace Connect4.Models
+namespace Connect4.Models.PlayAgent
 {
     public class SemiRandomAgent : RandomAgent
     {
@@ -44,10 +42,10 @@ namespace Connect4.Models
         private int[] PreferredNextMoves(Board board)
         {
             return Enumerable.Range(1, 7).Where(move => !_board.IsInvalidMove(move))
-                .Where(move => !IsMoveTheLetTheOtherPlayerWin(move)).ToArray();
+                .Where(move => !IsMoveThatLetTheOtherPlayerWin(move)).ToArray();
         }
 
-        private bool IsMoveTheLetTheOtherPlayerWin(int column)
+        private bool IsMoveThatLetTheOtherPlayerWin(int column)
         {
             var clonedBoard = _board.Clone();
             clonedBoard.Move(Player, column);
@@ -57,14 +55,12 @@ namespace Connect4.Models
 
         private bool IsLosingMove(int column)
         {
-            var win = _board.Clone().Move(OtherPlayer, column);
-            return win;
+            return _board.Clone().Move(OtherPlayer, column);
         }
 
         private bool IsWiningMove(int column)
         {
-            var win = _board.Clone().Move(Player, column);
-            return win;
+            return _board.Clone().Move(Player, column);
         }
     }
 }

@@ -1,9 +1,9 @@
 using System;
 using Connect4.Interfaces;
 
-namespace Connect4.Models
+namespace Connect4.Models.PlayAgent
 {
-    public class HumanAgent : IPlayerAgent
+    public class HumanAgent : PlayerAgent
     {
         public override int GetMove(Board board)
         {
@@ -24,7 +24,7 @@ namespace Connect4.Models
 
         public override void DisplayInvalidMove()
         {
-            Console.WriteLine("Invalid Choice!                           ");
+            Console.WriteLine("Invalid Choice!");
         }
     }
 }
